@@ -13,16 +13,9 @@ module.exports = {
         ctx.body = '<h1>home page /:id/:name</h1>';
     },
     login: async (ctx, next) => {
-        ctx.body =
-            `
-      <form action="/user/register" method="post">
-        <input name="name" type="text" placeholder="请输入用户名：ikcamp"/> 
-        <br/>
-        <input name="password" type="text" placeholder="请输入密码：123456"/>
-        <br/> 
-        <button>GoGoGo</button>
-      </form>
-    `
+        await ctx.render('home/login', {
+            btnName: 'gogogo'
+        });
     },
     register: async (ctx, next) => {
         const { name, password } = ctx.request.body;
