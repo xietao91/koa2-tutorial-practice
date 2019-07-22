@@ -4,15 +4,15 @@ const router = require('koa-router')();
 const app = new Koa();
 
 // 添加路由
-router.get('user','users/:id', async (ctx, next) => {
+router.get('user', 'users/:id', async (ctx, next) => {
     ctx.body = '<h1>user page</h1>';
 });
 
 const userUrl = router.url('user', 3);
-console.log( 'userUrl:' + userUrl);
+console.log('userUrl:' + userUrl);
 
 const userUrl2 = router.url('user', 4);
-console.log('userUrl2:' +userUrl2);
+console.log('userUrl2:' + userUrl2);
 
 
 // 调用路由中间件
