@@ -1,7 +1,7 @@
 const homeService = require('../service/home');
 module.exports = {
     index: async (ctx, next) => {
-        ctx.body = '<h1>index page</h1>';
+        await ctx.render('home/index', {title: 'ikcamp欢迎你'});
     },
     home: async (ctx, next) => {
         console.log(ctx.request.query);
@@ -19,8 +19,13 @@ module.exports = {
     },
     register: async (ctx, next) => {
         const { name, password } = ctx.request.body;
-        const data = await homeService.register(name, password);
-        ctx.response.body = data;
+        const res = await homeService.register(name, password);
+        if(res.status === -1){
+            await ctx.render('home/login',res.data);
+        } else {
+            ctx.state.title = "个人中心"
+            await ctx.render('home/success', res.data);
+        }
     },
     404: async (ctx, next) => {
         ctx.body = '<h1>404 Not Found</h1>';
